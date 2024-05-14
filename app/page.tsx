@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { getDatabase } from "@/lib/notion";
+import Table from "@/components/table";
 
 async function getPosts() {
   const database = await getDatabase();
-  // console.log(database);
   return database;
 }
 
@@ -16,6 +15,7 @@ export default async function Home() {
         {data.map((page) => (
           <p key={page.id}>{page.id}</p>
         ))}
+        <Table />
       </div>
     </main>
   );

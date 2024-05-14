@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "@notionhq/client": "^2.2.15",
+    "@tanstack/react-table": "^8.17.3",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
