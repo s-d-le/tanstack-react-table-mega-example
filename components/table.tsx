@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { Box } from "@chakra-ui/react";
-import { useReactTable, getCoreRowModel } from "@tanstack/react-table";
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 import DATA, { ITask } from "./mock";
 
 const columns = [
@@ -14,12 +18,12 @@ const columns = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: (props: any) => <p>{props.getValue()}</p>,
+    cell: (props: any) => <p>{props.getValue()?.name}</p>,
   },
   {
     accessorKey: "due",
     header: "Due",
-    cell: (props: any) => <p>{props.getValue()}</p>,
+    cell: (props: any) => <p>{props.getValue()?.toLocaleTimeString()}</p>,
   },
   {
     accessorKey: "notes",
@@ -40,12 +44,21 @@ const Table = () => {
 
   return (
     <Box>
-      <Box className="table">
+      <Box className="table" w={table.getTotalSize()}>
         {table.getHeaderGroups().map((headerGroup) => (
           <Box className="tr" key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <Box className="th" key={header.id}>
+              <Box className="th" key={header.id} w={header.getSize()}>
                 {header.column.columnDef.header?.toString() ?? null}
+              </Box>
+            ))}
+          </Box>
+        ))}
+        {table.getRowModel().rows.map((row) => (
+          <Box className="tr" key={row.id}>
+            {row.getVisibleCells().map((cell) => (
+              <Box className="td" key={cell.id} w={cell.column.getSize()}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Box>
             ))}
           </Box>
