@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Box } from "@chakra-ui/react";
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
+  ColumnDef,
+  SortingState,
 } from "@tanstack/react-table";
 import DATA, { ITask } from "./mock";
 
@@ -32,8 +34,14 @@ const columns = [
   },
 ];
 
-const TableView = () => {
-  const [data, setData] = useState<ITask[]>(DATA); //use props later
+interface TableViewProps {
+  columns: ColumnDef<any, any>[];
+  data: any[];
+  onSortingChange?: (sorting: SortingState) => void;
+}
+
+const TableView: FC<TableViewProps> = ({ columns, data }) => {
+  // const [data, setData] = useState<ITask[]>(DATA); //use props later
   const table = useReactTable({
     data,
     columns,

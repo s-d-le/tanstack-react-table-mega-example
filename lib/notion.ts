@@ -11,15 +11,30 @@ const notion = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
-export const getDatabase = async () => {
+export const getDatabase = async (filter = {}, sorts = []) => {
   const response = await notion.databases.query({
     database_id: databaseId ?? "",
   });
 
-  //   console.log((response.results[0] as PageObjectResponse).properties);
-  //   console.log(response.results[0].id);
+  /**
+   * Transform response to usable data for table component
+   */
+  const columns = Object.keys(
+    (response.results[0] as PageObjectResponse).properties || {}
+  ).map((key) => ({
+    accessorKey: key,
+    header: key,
+  }));
 
-  return response.results;
+  const data = response.results.map((item: any) => {
+    const rowData: any = {};
+    for (const key in item.properties) {
+      rowData[key] = item.properties[key]?.[item.properties[key].type];
+    }
+    return rowData;
+  });
+
+  return { columns, data };
 
   //   return new NextResponse(JSON.stringify(response.results), {
   //     headers: {
