@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, CSSProperties } from "react";
+import { FC, useState, CSSProperties, useEffect } from "react";
 import { Box } from "@chakra-ui/react";
 import {
   useReactTable,
@@ -53,6 +53,7 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onColumnOrderChange: setColumnOrder,
     columnResizeMode: "onChange",
   });
 
@@ -125,7 +126,7 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
 
   return (
     <>
-      <Box>
+      {/* <Box>
         <Box className="table" w={table.getTotalSize()}>
           {table.getHeaderGroups().map((headerGroup) => (
             <Box className="tr" key={headerGroup.id}>
@@ -146,7 +147,7 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
             </Box>
           ))}
         </Box>
-      </Box>
+      </Box> */}
       <DndContext
         collisionDetection={closestCenter}
         modifiers={[restrictToHorizontalAxis]}
@@ -160,27 +161,35 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
           <thead className="">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    onClick={header.column.getToggleSortingHandler()}
-                    className="relative px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    style={{ width: header.getSize() }}
-                  >
-                    {header.column.columnDef.header?.toString() ?? null}
-                    {{
-                      asc: " 🔼",
-                      desc: " 🔽",
-                    }[header.column.getIsSorted() as string] ?? null}
-                    <div
-                      onMouseDown={header.getResizeHandler()}
-                      onTouchStart={header.getResizeHandler()}
-                      className={`resizer ${
-                        header.column.getIsResizing() ? "isResizing" : ""
-                      }`}
-                    />
-                  </th>
-                ))}
+                <SortableContext
+                  items={columnOrder}
+                  strategy={horizontalListSortingStrategy}
+                >
+                  {headerGroup.headers.map((header) => (
+                    <>
+                      <DraggableTableHeader key={header.id} header={header} />
+                      {/* <th
+                        key={header.id}
+                        onClick={header.column.getToggleSortingHandler()}
+                        className="relative px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        style={{ width: header.getSize() }}
+                      >
+                        {header.column.columnDef.header?.toString() ?? null}
+                        {{
+                          asc: " 🔼",
+                          desc: " 🔽",
+                        }[header.column.getIsSorted() as string] ?? null}
+                        <div
+                          onMouseDown={header.getResizeHandler()}
+                          onTouchStart={header.getResizeHandler()}
+                          className={`resizer ${
+                            header.column.getIsResizing() ? "isResizing" : ""
+                          }`}
+                        />
+                      </th> */}
+                    </>
+                  ))}
+                </SortableContext>
               </tr>
             ))}
           </thead>
@@ -188,9 +197,16 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
+                  <SortableContext
+                    key={cell.id}
+                    items={columnOrder}
+                    strategy={horizontalListSortingStrategy}
+                  >
+                    <DragAlongCell key={cell.id} cell={cell} />
+                    {/* <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
+                  </td> */}
+                  </SortableContext>
                 ))}
               </tr>
             ))}

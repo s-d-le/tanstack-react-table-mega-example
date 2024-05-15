@@ -24,10 +24,17 @@ export const getDatabase = async (filter: any, sorts: any) => {
   const columns = Object.keys(
     (response.results[0] as PageObjectResponse).properties || {}
   )
-    .map((key) => ({
-      accessorKey: key,
-      header: key,
-    }))
+    .map((key) => {
+      const property = (response.results[0] as PageObjectResponse).properties[
+        key
+      ];
+
+      return {
+        accessorKey: key,
+        header: key,
+        id: property.id,
+      };
+    })
     .reverse();
 
   /**
@@ -45,8 +52,6 @@ export const getDatabase = async (filter: any, sorts: any) => {
     }
     return rowData;
   });
-
-  console.log(response.results);
 
   return { columns, data };
 
