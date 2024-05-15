@@ -32,7 +32,7 @@ const columns = [
   },
 ];
 
-const Table = () => {
+const TableView = () => {
   const [data, setData] = useState<ITask[]>(DATA); //use props later
   const table = useReactTable({
     data,
@@ -68,4 +68,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default TableView;

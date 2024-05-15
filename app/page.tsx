@@ -1,5 +1,5 @@
 import { getDatabase } from "@/lib/notion";
-import Table from "@/components/table";
+import TableView from "@/components/table-view";
 
 async function getPosts() {
   const database = await getDatabase();
@@ -15,7 +15,7 @@ export default async function Home() {
         {data.map((page) => (
           <p key={page.id}>{page.id}</p>
         ))}
-        <Table />
+        <TableView />
       </div>
     </main>
   );
