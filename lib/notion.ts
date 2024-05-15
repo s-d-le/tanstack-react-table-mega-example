@@ -11,9 +11,11 @@ const notion = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
-export const getDatabase = async (filter = {}, sorts = []) => {
+export const getDatabase = async (filter: any, sorts: any) => {
   const response = await notion.databases.query({
     database_id: databaseId ?? "",
+    filter,
+    sorts,
   });
 
   /**
@@ -21,18 +23,30 @@ export const getDatabase = async (filter = {}, sorts = []) => {
    */
   const columns = Object.keys(
     (response.results[0] as PageObjectResponse).properties || {}
-  ).map((key) => ({
-    accessorKey: key,
-    header: key,
-  }));
+  )
+    .map((key) => ({
+      accessorKey: key,
+      header: key,
+    }))
+    .reverse();
 
+  /**
+   * For MVP purposes, we will only get the content of property plain_text
+   */
   const data = response.results.map((item: any) => {
     const rowData: any = {};
     for (const key in item.properties) {
-      rowData[key] = item.properties[key]?.[item.properties[key].type];
+      const property = item.properties[key]?.[item.properties[key].type];
+      if (Array.isArray(property)) {
+        rowData[key] = property.map((p: any) => p.plain_text).join(", ");
+      } else {
+        rowData[key] = property?.plain_text || property || "";
+      }
     }
     return rowData;
   });
+
+  console.log(response.results);
 
   return { columns, data };
 

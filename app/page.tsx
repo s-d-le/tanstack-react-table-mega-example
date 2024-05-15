@@ -3,6 +3,7 @@ import TableView from "@/components/table-view";
 
 async function getPosts() {
   const database = await getDatabase();
+
   return database;
 }
 

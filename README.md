@@ -8,11 +8,6 @@ This project implements a Notion table view with sorting, rearrangement, resizin
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/yourusername/notion-table-view.git
-   cd notion-table-view
-   ```
-
 2. Install dependencies:
 
    ```bash
@@ -22,7 +17,7 @@ This project implements a Notion table view with sorting, rearrangement, resizin
 3. Run the application:
 
    ```bash
-   npm start
+   npm run start
    ```
 
 4. To run in Docker:
@@ -45,6 +40,10 @@ NOTION_DATABASE_ID=your-database-id
 - Table view for Notion databases
 - Column sorting, rearrangement, and resizing
 - Filtering with various property types and compound conditions
+
+# Improvements
+
+- In order to build an integration that works with any database a user picks, and to remain flexible as the user's chosen database inevitably changes in the future, use the Retrieve a database endpoint. Your integration can call this endpoint to get a current database schema, and then create the properties parameter in code based on that schema. [https://developers.notion.com/docs/working-with-databases]
 
 ## License
 
