@@ -83,28 +83,7 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
                 strategy={horizontalListSortingStrategy}
               >
                 {headerGroup.headers.map((header) => (
-                  <>
-                    <TableHeader key={header.id} header={header} />
-                    {/* <th
-                      key={header.id}
-                      onClick={header.column.getToggleSortingHandler()}
-                      className="relative px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                      style={{ width: header.column.getSize() }}
-                    >
-                      {header.column.columnDef.header?.toString() ?? null}
-                      {{
-                        asc: " 🔼",
-                        desc: " 🔽",
-                      }[header.column.getIsSorted() as string] ?? null}
-                      <div
-                        onMouseDown={header.getResizeHandler()}
-                        onTouchStart={header.getResizeHandler()}
-                        className={`resizer ${
-                          header.column.getIsResizing() ? "isResizing" : ""
-                        }`}
-                      />
-                    </th> */}
-                  </>
+                  <TableHeader key={header.id} header={header} />
                 ))}
               </SortableContext>
             </tr>

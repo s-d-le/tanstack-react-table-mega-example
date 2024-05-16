@@ -10,12 +10,12 @@ const TableHeader = ({ header }: { header: Header<any, unknown> }) => {
     });
 
   const style: CSSProperties = {
-    opacity: isDragging ? 0.8 : 1,
     position: "relative",
+    opacity: isDragging ? 0.8 : 1,
     transform: CSS.Translate.toString(transform), // translate instead of transform to avoid squishing
     transition: "width transform 0.2s ease-in-out",
     whiteSpace: "nowrap",
-    width: header.getSize(),
+    width: header.column.getSize(),
     zIndex: isDragging ? 1 : 0,
   };
 
@@ -23,12 +23,10 @@ const TableHeader = ({ header }: { header: Header<any, unknown> }) => {
     <th
       colSpan={header.colSpan}
       ref={setNodeRef}
+      //   className="relative px-6 py-3 text-left text-xs font-medium text-gray-500"
       style={style}
       onClick={header.column.getToggleSortingHandler()}
     >
-      {header.isPlaceholder
-        ? null
-        : flexRender(header.column.columnDef.header, header.getContext())}
       {header.column.columnDef.header?.toString() ?? null}
       {{
         asc: " 🔼",
