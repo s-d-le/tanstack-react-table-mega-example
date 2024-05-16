@@ -13,6 +13,7 @@ const FilterUI: React.FC<FilterUIProps> = ({ onFilterChange }) => {
 
   const addFilter = () => {
     setFilters([...filters, { property: "", operator: "", value: "" }]);
+    console.log(filters);
   };
 
   const updateFilter = (index: number, key: string, value: string) => {
@@ -51,6 +52,12 @@ const FilterUI: React.FC<FilterUIProps> = ({ onFilterChange }) => {
           />
         </div>
       ))}
+      <button
+        type="submit"
+        className="px-4 py-2 bg-indigo-500 text-white rounded-md shadow-sm hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        Apply Filter
+      </button>
       <button
         onClick={addFilter}
         className="px-4 py-2 bg-blue-500 text-white rounded"

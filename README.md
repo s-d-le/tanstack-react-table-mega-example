@@ -44,6 +44,7 @@ NOTION_DATABASE_ID=your-database-id
 # Improvements
 
 - Use server actions to handle the API calls. Currently the MVP uses client side to fetch data. It will require to pass filters and sorts objects through url params to the server. However this will scale much better and works faster with larger database.
+- Use @tanstack/react-query to handle the data fetching and caching.
 - In order to build an integration that works with any database a user picks, and to remain flexible as the user's chosen database inevitably changes in the future, use the Retrieve a database endpoint. Your integration can call this endpoint to get a current database schema, and then create the properties parameter in code based on that schema. [https://developers.notion.com/docs/working-with-databases]
 
 ## License
