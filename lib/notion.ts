@@ -1,7 +1,10 @@
 "use server";
 
 import { Client } from "@notionhq/client";
-import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import {
+  PageObjectResponse,
+  QueryDatabaseParameters,
+} from "@notionhq/client/build/src/api-endpoints";
 import { cache } from "react";
 import { NextResponse } from "next/server";
 
@@ -11,9 +14,20 @@ const notion = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
-export const getDatabase = async (filter: any, sorts: any) => {
-  const response = await notion.databases.query({
+// {
+//   filter = { or: [{ property: "Name", rich_text: { starts_with: "sushi" } }] },
+//   sorts = [],
+// }: QueryDatabaseParameters
+
+export const getDatabase = async (
+  { database_id, filter, sorts }: QueryDatabaseParameters = {
     database_id: databaseId ?? "",
+    filter: { or: [] },
+    sorts: [],
+  }
+) => {
+  const response = await notion.databases.query({
+    database_id,
     filter,
     sorts,
   });

@@ -99,9 +99,6 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
                   strategy={horizontalListSortingStrategy}
                 >
                   <TableCell key={cell.id} cell={cell} />
-                  {/* <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td> */}
                 </SortableContext>
               ))}
             </tr>
