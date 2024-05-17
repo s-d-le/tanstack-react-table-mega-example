@@ -1,5 +1,7 @@
 # Notion Table View and Filters
 
+![cover](https://i.imgur.com/HH3jGQp.png)
+
 ## Description
 
 This project implements `@tanstack/react-table` with sorting, rearrangement, resizing, and filtering using Notion API and `@dnd-kit`
