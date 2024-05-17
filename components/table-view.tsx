@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -35,9 +35,12 @@ interface TableViewProps {
 
 const TableView: FC<TableViewProps> = ({ columns, data }) => {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnOrder, setColumnOrder] = useState<string[]>(() =>
-    columns.map((c) => c.id!)
-  );
+  const [columnOrder, setColumnOrder] = useState<string[]>([]);
+
+  // set initial column order for DnD
+  useEffect(() => {
+    setColumnOrder(columns.map((c) => c.id!));
+  }, [columns]);
 
   const table = useReactTable({
     data,
@@ -63,6 +66,8 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
   }
 
   const sensors = useSensors(useSensor(MouseSensor, {}));
+
+  console.log;
 
   return (
     <DndContext
