@@ -41,7 +41,7 @@ NOTION_DATABASE_ID=your-database-id
 - Column sorting, rearrangement, and resizing
 - Filtering with various property types and compound conditions
 
-# Improvements
+## Improvements
 
 - Use server actions to handle the API calls. Currently the MVP uses client side to fetch data. It will require to pass filters and sorts objects through url params to the server. However this will scale much better and works faster with larger database.
 - Use @tanstack/react-query to handle the data fetching and caching.

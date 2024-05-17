@@ -44,9 +44,10 @@ const FilterUI: React.FC<FilterUIProps> = ({ onFilterChange }) => {
     const filter = filterConditions.or.length
       ? { or: filterConditions.or }
       : {};
-    if (filterConditions.and.length) {
-      filter.and = filterConditions.and;
-    }
+
+    // if (filterConditions.and.length) {
+    //   filter.and = filterConditions.and;
+    // }
 
     onFilterChange(filter);
   };
