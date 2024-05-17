@@ -27,14 +27,16 @@ const TableHeader = ({ header }: { header: Header<any, unknown> }) => {
       style={style}
       onClick={header.column.getToggleSortingHandler()}
     >
-      {header.column.columnDef.header?.toString() ?? null}
-      {{
-        asc: " 🔼",
-        desc: " 🔽",
-      }[header.column.getIsSorted() as string] ?? null}
-      <button {...attributes} {...listeners}>
-        🟰
-      </button>
+      <div className="flex justify-between">
+        {header.column.columnDef.header?.toString() ?? null}
+        {{
+          asc: " ↑",
+          desc: " ↓",
+        }[header.column.getIsSorted() as string] ?? null}
+        <button {...attributes} {...listeners} className="drag-handle">
+          ⛚
+        </button>
+      </div>
       <div
         onMouseDown={header.getResizeHandler()}
         onTouchStart={header.getResizeHandler()}
