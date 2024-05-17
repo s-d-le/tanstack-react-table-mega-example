@@ -23,7 +23,7 @@ const TableHeader = ({ header }: { header: Header<any, unknown> }) => {
     <th
       colSpan={header.colSpan}
       ref={setNodeRef}
-      //   className="relative px-6 py-3 text-left text-xs font-medium text-gray-500"
+      className="th td cell-padding"
       style={style}
       onClick={header.column.getToggleSortingHandler()}
     >

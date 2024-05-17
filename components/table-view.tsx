@@ -76,11 +76,8 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
       onDragEnd={handleDragEnd}
       sensors={sensors}
     >
-      <table
-        className="min-w-full border border-gray-300 divide-y divide-gray-200"
-        style={{ width: table.getTotalSize() }}
-      >
-        <thead className="">
+      <table className="table" style={{ width: table.getTotalSize() }}>
+        <thead className="th">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               <SortableContext

@@ -18,7 +18,7 @@ const TableCell = ({ cell }: { cell: Cell<any, unknown> }) => {
   };
 
   return (
-    <td style={style} ref={setNodeRef}>
+    <td className="td cell-padding" style={style} ref={setNodeRef}>
       {flexRender(cell.column.columnDef.cell, cell.getContext())}
     </td>
   );
