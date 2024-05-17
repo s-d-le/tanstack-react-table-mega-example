@@ -2,7 +2,7 @@
 
 ## Description
 
-This project implements a Notion table view with sorting, rearrangement, resizing, and filtering capabilities using the Notion API.
+This project implements `@tanstack/react-table` with sorting, rearrangement, resizing, and filtering using Notion API and `@dnd-kit`
 
 ## Installation
 
