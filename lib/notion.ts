@@ -12,6 +12,9 @@ const notion = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
+/**
+ * TODO: Init query params
+ */
 // export const getDatabase = async (
 //   { database_id, filter, sorts }: QueryDatabaseParameters = {
 //     database_id: databaseId ?? "",
@@ -63,10 +66,4 @@ export const getDatabase = async (filter: any, sorts: any) => {
   });
 
   return { columns, data };
-
-  //   return new NextResponse(JSON.stringify(response.results), {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
 };

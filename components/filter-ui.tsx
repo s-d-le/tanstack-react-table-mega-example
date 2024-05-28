@@ -45,6 +45,9 @@ const FilterUI: React.FC<FilterUIProps> = ({ onFilterChange }) => {
       ? { or: filterConditions.or }
       : {};
 
+    /**
+     * TODO: Add support for AND conditions
+     */
     // if (filterConditions.and.length) {
     //   filter.and = filterConditions.and;
     // }
