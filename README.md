@@ -11,11 +11,11 @@ This project uses `@tanstack/react-table` to build a mega example with many feat
 - [x] Column reordering
 - [x] Filters
 - [x] Skeleton loading
-- [] Row selection
-- [] Row expand
-- [] Pagination
+- [ ] Row selection
+- [ ] Row expand
+- [ ] Pagination
 
-Using Notion API as example backend, `@dnd-kit` for column reordering, 'shadcn/ui' for UI components
+Using Notion API as example backend, `@dnd-kit` for column reordering.
 
 Why build this project? Because its easier to remove features already working than adding them. `@tanstack/react-table` is a wonderful library but notorious for its steep learning curve and lack luster docs. Use this project as a starting point if you want to learn while implementing it.
 

@@ -3,24 +3,28 @@ import { useState, useEffect } from "react";
 import { getDatabase } from "@/lib/notion";
 import TableView from "@/components/table-view";
 import FilterUI from "@/components/filter-ui";
+import { visibleColumns } from "@/app/visibleColumns";
 
 export default function Home() {
-  // const { columns, data } = await getPosts();
-  // {
-  //   or: [{ property: "Name", rich_text: { starts_with: "sushi" } }],
-  // }
-
   const [data, setData] = useState<any[]>([]);
-  const [columns, setColumns] = useState<any[]>([]);
+  // const [columns, setColumns] = useState<any[]>([]);
   const [filter, setFilter] = useState<any>({ or: [] });
   const [sorts, setSorts] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const { columns, data } = await getDatabase(filter, sorts);
-
-      setColumns(columns);
-      setData(data);
+      setIsLoading(true);
+      try {
+        // use columns from response if you dont want to bother with visibleColumns
+        const { columns, data } = await getDatabase(filter, sorts);
+        // setColumns(columns);
+        setData(data);
+      } catch {
+        throw new Error("Failed to fetch data");
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchData();
   }, [filter, sorts]);
@@ -29,7 +33,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center font-momo">
         <FilterUI onFilterChange={setFilter} />
-        <TableView columns={columns} data={data} />
+        <TableView columns={visibleColumns} data={data} isLoading={isLoading} />
       </div>
     </main>
   );

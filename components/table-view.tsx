@@ -29,13 +29,15 @@ import TableHeader from "@/components/table-header";
 import TableCell from "@/components/table-cell";
 
 interface TableViewProps {
-  columns: ColumnDef<any, any>[];
-  data: any[];
+  columns: ColumnDef<unknown, any>[];
+  data: Record<string, any>[];
+  isLoading?: boolean;
 }
 
-const TableView: FC<TableViewProps> = ({ columns, data }) => {
+const TableView: FC<TableViewProps> = ({ columns, data, isLoading }) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnOrder, setColumnOrder] = useState<string[]>([]);
+  const skeletonRows = Array.from({ length: 10 }, (_, index) => index);
 
   // set initial column order for DnD
   useEffect(() => {
@@ -90,19 +92,29 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <SortableContext
-                  key={cell.id}
-                  items={columnOrder}
-                  strategy={horizontalListSortingStrategy}
-                >
-                  <TableCell key={cell.id} cell={cell} />
-                </SortableContext>
+          {isLoading
+            ? skeletonRows.map((row) => (
+                <tr key={row}>
+                  {columns?.map((column) => (
+                    <td key={column.id} className="td cell-padding">
+                      <div className="skeleton">...</div>
+                    </td>
+                  ))}
+                </tr>
+              ))
+            : table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <SortableContext
+                      key={cell.id}
+                      items={columnOrder}
+                      strategy={horizontalListSortingStrategy}
+                    >
+                      <TableCell key={cell.id} cell={cell} />
+                    </SortableContext>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
         </tbody>
       </table>
     </DndContext>

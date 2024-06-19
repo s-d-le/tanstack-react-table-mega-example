@@ -64,6 +64,5 @@ export const getDatabase = async (filter: any, sorts: any) => {
     }
     return rowData;
   });
-
   return { columns, data };
 };
