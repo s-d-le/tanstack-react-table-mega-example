@@ -67,8 +67,6 @@ const TableView: FC<TableViewProps> = ({ columns, data }) => {
 
   const sensors = useSensors(useSensor(MouseSensor, {}));
 
-  console.log;
-
   return (
     <DndContext
       collisionDetection={closestCenter}

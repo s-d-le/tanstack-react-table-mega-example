@@ -4,6 +4,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 const TableCell = ({ cell }: { cell: Cell<any, unknown> }) => {
+  console.log(cell);
   const { isDragging, setNodeRef, transform } = useSortable({
     id: cell.column.id,
   });
