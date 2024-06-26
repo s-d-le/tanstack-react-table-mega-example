@@ -11,13 +11,16 @@ This project uses `@tanstack/react-table` to build a mega example with many feat
 - [x] Column reordering
 - [x] Filters
 - [x] Skeleton loading
+- [ ] Responsive design
 - [ ] Row selection
 - [ ] Row expand
 - [ ] Pagination
 
 Using Notion API as example backend, `@dnd-kit` for column reordering.
 
-Why build this project? Because its easier to remove features already working than adding them. `@tanstack/react-table` is a wonderful library but notorious for its steep learning curve and lack luster docs. Use this project as a starting point if you want to learn while implementing it.
+## Why build this project?
+
+Because its easier to remove features already working than adding them. `@tanstack/react-table` is a wonderful library but notorious for its steep learning curve and lack luster docs. Use this project as a starting point if you want to learn while implementing it.
 
 ## Installation
 
@@ -49,12 +52,6 @@ Set your Notion API key in a `.env` file:
 NOTION_SECRET=your-secret-api-key
 NOTION_DATABASE_ID=your-database-id
 ```
-
-## Features
-
-- Table view for Notion databases
-- Column sorting, rearrangement, and resizing
-- Filtering with various property types and compound conditions
 
 ## Improvements
 
