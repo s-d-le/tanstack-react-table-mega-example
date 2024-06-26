@@ -76,7 +76,10 @@ const TableView: FC<TableViewProps> = ({ columns, data, isLoading }) => {
       onDragEnd={handleDragEnd}
       sensors={sensors}
     >
-      <table className="table" style={{ width: table.getTotalSize() }}>
+      <table
+        className="table responsiveTable"
+        // style={{ width: table.getTotalSize() }}
+      >
         <thead className="th">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -110,7 +113,11 @@ const TableView: FC<TableViewProps> = ({ columns, data, isLoading }) => {
                       items={columnOrder}
                       strategy={horizontalListSortingStrategy}
                     >
-                      <TableCell key={cell.id} cell={cell} />
+                      <TableCell
+                        key={cell.id}
+                        cell={cell}
+                        header={cell.column.columnDef.header as string}
+                      />
                     </SortableContext>
                   ))}
                 </tr>

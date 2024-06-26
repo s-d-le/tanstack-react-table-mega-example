@@ -11,7 +11,7 @@ This project uses `@tanstack/react-table` to build a mega example with many feat
 - [x] Column reordering
 - [x] Filters
 - [x] Skeleton loading
-- [ ] Responsive design
+- [x] Responsive design
 - [ ] Row selection
 - [ ] Row expand
 - [ ] Pagination

@@ -3,7 +3,13 @@ import { flexRender, Cell } from "@tanstack/react-table";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-const TableCell = ({ cell }: { cell: Cell<any, unknown> }) => {
+const TableCell = ({
+  cell,
+  header,
+}: {
+  cell: Cell<any, unknown>;
+  header: string;
+}) => {
   console.log(cell);
   const { isDragging, setNodeRef, transform } = useSortable({
     id: cell.column.id,
@@ -14,12 +20,13 @@ const TableCell = ({ cell }: { cell: Cell<any, unknown> }) => {
     position: "relative",
     transform: CSS.Translate.toString(transform), // translate instead of transform to avoid squishing
     transition: "width transform 0.2s ease-in-out",
-    width: cell.column.getSize(),
+    // width: cell.column.getSize(),
     zIndex: isDragging ? 1 : 0,
   };
 
   return (
-    <td className="td cell-padding" style={style} ref={setNodeRef}>
+    <td className="td cell-padding pivoted" style={style} ref={setNodeRef}>
+      <span className="tdBefore">{header}</span>
       {flexRender(cell.column.columnDef.cell, cell.getContext())}
     </td>
   );
